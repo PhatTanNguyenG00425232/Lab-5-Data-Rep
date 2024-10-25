@@ -26,9 +26,11 @@ app.use((err,req,res,next)=>{
 })
 
 
-//add second URL paramenter for surname
-app.get('/hello/:name/:surname', (req, res) => {
-    res.send(`Hello `+req.params.name+' '+req.params.surname);
+//handle the submit button (get request) from index.html and execute the function
+app.get('/name', (req, res) => {
+    const firstname = req.query.firstname;
+    const lastname = req.query.lastname;
+    res.send(`Hello ${firstname} ${lastname}`);
 });
 
 //get api that return list of movie
