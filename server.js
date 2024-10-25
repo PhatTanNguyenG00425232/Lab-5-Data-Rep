@@ -18,11 +18,19 @@ app.get('/whatever',(req,res)=>{
 
 
 //error-handling to catch any server error
+//500 for server
 app.use((err,req,res,next)=>{
     console.error(err.stack);
     res.status(500).send('Something went wrong!');
 
 })
+
+
+//add second URL paramenter for surname
+app.get('/hello/:name/:surname', (req, res) => {
+    res.send(`Hello `+req.params.name+' '+req.params.surname);
+});
+
 
 
 //server listen to HTTP request
