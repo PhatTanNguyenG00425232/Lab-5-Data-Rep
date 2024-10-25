@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const port = 4000;
 
+//Add body-parser middleware
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //get method listening to url, localhost
 //excute function when HTTP come in --> response
@@ -25,11 +28,25 @@ app.use((err,req,res,next)=>{
 
 })
 
+//a route that accepts a name parameter in the URL 
+app.get('/hello/:name/:surname', (req, res) => {
+    const name = req.params.name;
+    const surname = req.params.surname
+    res.send(`Hello ${name} ${surname}`);
+});
+
 
 //handle the submit button (get request) from index.html and execute the function
 app.get('/name', (req, res) => {
     const firstname = req.query.firstname;
     const lastname = req.query.lastname;
+    res.send(`Hello ${firstname} ${lastname}`);
+});
+
+//handle the POST request for /name
+app.post('/name', (req, res) => {
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
     res.send(`Hello ${firstname} ${lastname}`);
 });
 
