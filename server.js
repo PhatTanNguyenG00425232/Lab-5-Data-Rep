@@ -59,6 +59,15 @@ app.get('/api/movies', (req, res) => {
     res.status(200).json({myMoives:movies});
 });
 
+//serve the HTML file
+const path = require('path');
+app.get('/index', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// middleware to serve all static files (CSS, JS, etc.) from a public directory
+app.use(express.static('public'));
+
 //server listen to HTTP request
 //alway have to be bottom of the file
 app.listen(port, () => {
